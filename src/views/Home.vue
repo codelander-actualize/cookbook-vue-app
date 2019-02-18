@@ -8,12 +8,16 @@
     	<p>Ingredients: {{ recipe.ingredients }}</p>
     	<p>Directions: {{ recipe.directions }}</p>
     	<p>Prep Time: {{ recipe.prep_time }}</p>
+      <img :src="recipe.image_url" :alt="recipe.title">
     </div>
 
   </div>
 </template>
 
 <style>
+  img {
+    width: 300px;
+  }
 </style>
 
 <script>
