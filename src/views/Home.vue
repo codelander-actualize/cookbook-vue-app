@@ -2,7 +2,17 @@
   <div class="home">
 
     <h1>New Recipe</h1>
-    <button v-on:click="createRecipe()">Create</button>
+    <div>
+      Title: <input type="text" v-model="newRecipeTitle"><br>
+      Ingredients: <input type="text" v-model="newRecipeIngredients"><br>
+      Directions: <input type="text" v-model="newRecipeDirections"><br>
+      Prep Time: <input type="text" v-model="newRecipePrepTime"><br>
+      Image Url: <input type="text" v-model="newRecipeImageUrl"><br>
+
+      <div>{{ newRecipeTitle }}</div>
+      <button v-on:click="createRecipe()">Create</button>
+    </div>
+
     <h1>All Recipes</h1>
 
     <div v-for="recipe in recipes">
@@ -28,7 +38,12 @@ var axios = require("axios");
 export default {
   data: function() {
     return {
-      recipes: []
+      recipes: [],
+      newRecipeTitle: "",
+      newRecipeIngredients: "",
+      newRecipeDirections: "",
+      newRecipePrepTime: "",
+      newRecipeImageUrl: ""
     };
   },
   created: function() {
@@ -39,11 +54,11 @@ export default {
   methods: {
     createRecipe: function() {
       var recipeParams = {
-        title: "Veggie Lasagna",
-        ingredients: "Noodles, sauce, vegetables, spices",
-        directions: "Layer carefully into a dish and bake",
-        image_url:"https://cdn-image.myrecipes.com/sites/default/files/styles/medium_2x/public/image/recipes/sl/11/02/fresh-vegetable-lasagna-sl-x.jpg?itok=Uu1Gar28",
-        prep_time: 150,
+        title: this.newRecipeTitle,
+        ingredients: this.newRecipeIngredients,
+        directions: this.newRecipeDirections,
+        image_url: this.newRecipeImageUrl,
+        prep_time: this.newRecipePrepTime,
         user_id: 1
       };
       axios.post("/api/recipes", recipeParams).then(response => {
