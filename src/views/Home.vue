@@ -1,7 +1,9 @@
 <template>
   <div class="home">
 
-    <h1>{{ message }}</h1>
+    <h1>New Recipe</h1>
+    <button v-on:click="createRecipe()">Create</button>
+    <h1>All Recipes</h1>
 
     <div v-for="recipe in recipes">
     	<h2>Title: {{ recipe.title }}</h2>
@@ -26,7 +28,6 @@ var axios = require("axios");
 export default {
   data: function() {
     return {
-      message: "Hello World!",
       recipes: []
     };
   },
@@ -35,7 +36,22 @@ export default {
   		this.recipes = response.data;
   	});
   },
-  methods: {}
+  methods: {
+    createRecipe: function() {
+      var recipeParams = {
+        title: "Veggie Lasagna",
+        ingredients: "Noodles, sauce, vegetables, spices",
+        directions: "Layer carefully into a dish and bake",
+        image_url:"https://cdn-image.myrecipes.com/sites/default/files/styles/medium_2x/public/image/recipes/sl/11/02/fresh-vegetable-lasagna-sl-x.jpg?itok=Uu1Gar28",
+        prep_time: 150,
+        user_id: 1
+      };
+      axios.post("/api/recipes", recipeParams).then(response => {
+        console.log("Success!", response.data);
+        this.recipes.push(response.data);
+      });
+    }
+  }
 };
 </script>
 
