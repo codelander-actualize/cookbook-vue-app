@@ -14,20 +14,25 @@
 
     <h1>All Recipes</h1>
 
-
-    <div>
-      {{ currentRecipe }}
-    </div>
     <div v-for="recipe in recipes">
     	<h2>Title: {{ recipe.title }}</h2>
       <img :src="recipe.image_url" :alt="recipe.title">
       <div>
-        <button v-on:click="currentRecipe = recipe">More Info</button>
+        <button v-on:click="showRecipe(recipe)">More Info</button>
       </div>
       <div v-if="currentRecipe === recipe">
         <p>Ingredients: {{ currentRecipe.ingredients }}</p>
         <p>Directions: {{ currentRecipe.directions }}</p>
         <p>Prep Time: {{ currentRecipe.prep_time }}</p>
+        <h4>Edit Recipe</h4>
+        <div>
+          Title: <input type="text" v-model="recipe.title"><br>
+          Ingredients: <input type="text" v-model="recipe.ingredients"><br>
+          Directions: <input type="text" v-model="recipe.directions"><br>
+          Prep Time: <input type="text" v-model="recipe.prep_time"><br>
+          Image Url: <input type="text" v-model="recipe.image_url"><br>
+          <button v-on:click="updateRecipe(recipe)">Update</button>
+        </div>
       </div>
     </div>
 
@@ -74,6 +79,26 @@ export default {
       axios.post("/api/recipes", recipeParams).then(response => {
         console.log("Success!", response.data);
         this.recipes.push(response.data);
+      });
+    },
+    showRecipe: function(recipe) {
+      if (this.currentRecipe === recipe){
+        this.currentRecipe = {};
+      } else {
+        this.currentRecipe = recipe;
+      }
+    },
+    updateRecipe: function(recipe) {
+      var recipeParams = {
+        title: recipe.title,
+        ingredients: recipe.ingredients,
+        directions: recipe.directions,
+        image_url: recipe.image_url,
+        prep_time: recipe.prep_time
+      };
+      axios.patch("/api/recipes/" + recipe.id, recipeParams).then(response => {
+        console.log("Success!", response.data);
+        recipe = response.data;
       });
     }
   }
