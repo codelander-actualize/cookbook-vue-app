@@ -2,7 +2,7 @@
   <div class="recipes-new">
     <h1>New Recipe</h1>
 
-		<!-- <img v-if="status" v-bind:src="'https://http.cat/' + status" alt=""> -->
+		<img v-if="status" v-bind:src="'https://http.cat/' + status" alt="">
     <ul>
     	<li v-for="error in errors">{{ error }}</li>
     </ul>
@@ -43,7 +43,7 @@ export default {
       newRecipePrepTime: "",
       newRecipeImageUrl: "",
       errors: [],
-      // status: ""
+      status: ""
     };
   },
   methods: {
@@ -61,7 +61,7 @@ export default {
         this.$router.push("/recipes/" + response.data.id);
       }).catch(error => {
       	this.errors = error.response.data.errors;
-      	// this.status = error.response.status;
+      	this.status = error.response.status;
       });
     }
   }

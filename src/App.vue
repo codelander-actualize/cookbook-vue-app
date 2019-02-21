@@ -10,11 +10,11 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a><router-link to="/">Home</router-link></a>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/">Home</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/recipes/new">New Recipe</router-link>
+              <router-link class="nav-link" to="/recipes/new">New Recipe</router-link>
             </li>
           </ul>
         </div>
@@ -28,5 +28,8 @@
   </div>
 </template>
 
-
-
+<style>
+  #nav a.router-link-exact-active {
+    color: #42b983;
+  }
+</style>
