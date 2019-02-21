@@ -5,24 +5,13 @@
 
     <div v-for="recipe in recipes">
     	<h2>Title: {{ recipe.title }}</h2>
-      <img :src="recipe.image_url" :alt="recipe.title">
+
+      <router-link v-bind:to="'/recipes/' + recipe.id">
+        <img :src="recipe.image_url" :alt="recipe.title">
+      </router-link> 
+
       <div>
         <button v-on:click="showRecipe(recipe)">More Info</button>
-      </div>
-      <div v-if="currentRecipe === recipe">
-        <p>Ingredients: {{ currentRecipe.ingredients }}</p>
-        <p>Directions: {{ currentRecipe.directions }}</p>
-        <p>Prep Time: {{ currentRecipe.prep_time }}</p>
-        <h4>Edit Recipe</h4>
-        <div>
-          Title: <input type="text" v-model="recipe.title"><br>
-          Ingredients: <input type="text" v-model="recipe.ingredients"><br>
-          Directions: <input type="text" v-model="recipe.directions"><br>
-          Prep Time: <input type="text" v-model="recipe.prep_time"><br>
-          Image Url: <input type="text" v-model="recipe.image_url"><br>
-          <button v-on:click="updateRecipe(recipe)">Update</button>
-          <button v-on:click="destroyRecipe(recipe)">Destroy</button>
-        </div>
       </div>
     </div>
 
