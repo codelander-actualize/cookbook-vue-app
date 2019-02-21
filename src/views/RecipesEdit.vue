@@ -8,22 +8,22 @@
 
     <form v-on:submit.prevent="submit()">
     	<div>
-    	  Title: <input type="text" v-model="recipe.title">
+    	  Title: <input type="text" class="form-control" v-model="recipe.title">
     	</div>
     	<div>
-    		Ingredients: <input type="text" v-model="recipe.ingredients">
+    		Ingredients: <input type="text" class="form-control" v-model="recipe.ingredients">
     	</div>
     	<div>
-    		Directions: <input type="text" v-model="recipe.directions">
+    		Directions: <input type="text" class="form-control" v-model="recipe.directions">
     	</div>
     	<div>
-    		Prep Time: <input type="text" v-model="recipe.prep_time">
+    		Prep Time: <input type="text" class="form-control" v-model="recipe.prep_time">
     	</div>
     	<div>
-    		Image Url: <input type="text" v-model="recipe.image_url">
+    		Image Url: <input type="text" class="form-control" v-model="recipe.image_url">
     	</div>
 			<div>
-				<input type="submit" value="Update">
+				<input type="submit" class="btn btn-primary" value="Update">
 			</div>
     </form>
 

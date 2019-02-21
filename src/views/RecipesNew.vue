@@ -9,22 +9,22 @@
 
     <form v-on:submit.prevent="submit()">
     	<div>
-    	  Title: <input type="text" v-model="newRecipeTitle">
+    	  Title: <input type="text" class="form-control" v-model="newRecipeTitle">
     	</div>
     	<div>
-    		Ingredients: <input type="text" v-model="newRecipeIngredients">
+    		Ingredients: <input type="text" class="form-control" v-model="newRecipeIngredients">
     	</div>
     	<div>
-    		Directions: <input type="text" v-model="newRecipeDirections">
+    		Directions: <input type="text" class="form-control" v-model="newRecipeDirections">
     	</div>
     	<div>
-    		Prep Time: <input type="text" v-model="newRecipePrepTime">
+    		Prep Time: <input type="text" class="form-control" v-model="newRecipePrepTime">
     	</div>
     	<div>
-    		Image Url: <input type="text" v-model="newRecipeImageUrl">
+    		Image Url: <input type="text" class="form-control" v-model="newRecipeImageUrl">
     	</div>
 			<div>
-				<input type="submit" value="Create">
+				<input type="submit" class="btn btn-primary" value="Create">
 			</div>
     </form>
 
