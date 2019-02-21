@@ -58,7 +58,7 @@ export default {
       };
       axios.post("/api/recipes", recipeParams).then(response => {
         console.log("Success!", response.data);
-        this.$router.push("/");
+        this.$router.push("/recipes/" + response.data.id);
       }).catch(error => {
       	this.errors = error.response.data.errors;
       	// this.status = error.response.status;
