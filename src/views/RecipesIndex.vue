@@ -1,20 +1,25 @@
 <template>
   <div class="recipes-index">
 
-    <h1>All Recipes</h1>
+    <div id="fh5co-work-section">
+      <div class="container">
+        <div class="row">
 
-    <div class="card-columns">
-      <div v-for="recipe in recipes">
-        
-        <router-link v-bind:to="'/recipes/' + recipe.id">
-          <div class="card" style="width: 18rem;">
-            <img :src="recipe.image_url" class="card-img-top" :alt="recipe.title">
-            <div class="card-body">
-              <p class="card-text">{{ recipe.title }}</p>
-            </div>
+
+          <div v-for="recipe in recipes" class="col-md-4">
+            <router-link v-bind:to="'/recipes/' + recipe.id" class="item-grid text-center">
+              <div class="image" :style="'background-image: url(' + recipe.image_url + ')'"></div>
+              <div class="v-align">
+                <div class="v-align-middle">
+                  <h3 class="title">{{ recipe.title }}</h3>
+                  <h5 class="category">Preparation Time: {{ recipe.formatted.prep_time }}</h5>
+                </div>
+              </div>
+            </router-link>
           </div>
-        </router-link>
 
+
+        </div>
       </div>
     </div>
 
