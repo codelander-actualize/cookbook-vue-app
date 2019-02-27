@@ -25,18 +25,21 @@
             </button>
           </div>
 
-          <div v-for="recipe in orderBy(filterBy(recipes, titleFilter, 'title', 'ingredients'), sortAttribute, sortAscending)" class="col-md-4">
 
-            <router-link v-bind:to="'/recipes/' + recipe.id" class="item-grid text-center">
-              <div class="image" :style="'background-image: url(' + recipe.image_url + ')'"></div>
-              <div class="v-align">
-                <div class="v-align-middle">
-                  <h3 class="title">{{ recipe.title }}</h3>
-                  <h5 class="category">Preparation Time: {{ recipe.formatted.prep_time }}</h5>
+          <transition-group name="fade">
+            <div v-for="recipe in orderBy(filterBy(recipes, titleFilter, 'title', 'ingredients'), sortAttribute, sortAscending)" class="col-md-4" v-bind:key="recipe.id">
+
+              <router-link v-bind:to="'/recipes/' + recipe.id" class="item-grid text-center">
+                <div class="image" :style="'background-image: url(' + recipe.image_url + ')'"></div>
+                <div class="v-align">
+                  <div class="v-align-middle">
+                    <h3 class="title">{{ recipe.title }}</h3>
+                    <h5 class="category">Preparation Time: {{ recipe.formatted.prep_time }}</h5>
+                  </div>
                 </div>
-              </div>
-            </router-link>
-          </div>
+              </router-link>
+            </div>
+          </transition-group>
 
 
         </div>
@@ -45,6 +48,41 @@
 
   </div>
 </template>
+
+
+<style>
+  /* Vue.js fade */
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity 1s
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0
+  }
+
+  /* Vue.js slide-right */
+  .slide-right-enter-active {
+    transition: all .3s ease;
+  }
+  .slide-right-leave-active {
+    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+  .slide-right-enter, .slide-right-leave-to {
+    transform: translateX(10px);
+    opacity: 0;
+  }
+
+  /* Vue.js slide-left */
+  .slide-left-enter-active {
+    transition: all .3s ease;
+  }
+  .slide-left-leave-active {
+    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+  .slide-left-enter, .slide-left-leave-to {
+    transform: translateX(-10px);
+    opacity: 0;
+  }
+</style>
 
 
 <script>
