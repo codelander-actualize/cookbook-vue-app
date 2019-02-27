@@ -7,9 +7,15 @@
 
           
           <div>
-            Search by Title: <input type="text" class="form-control" v-model="titleFilter">
-          </div>
+            Search by Title: <input type="text" class="form-control" v-model="titleFilter" list="recipeTitles">
+          </div><br>
+
+          <datalist id="recipeTitles">
+            <option v-for="recipe in recipes">{{ recipe.title }}</option>
+          </datalist>
+
           <div v-for="recipe in filterBy(recipes, titleFilter, 'title', 'ingredients')" class="col-md-4">
+
             <router-link v-bind:to="'/recipes/' + recipe.id" class="item-grid text-center">
               <div class="image" :style="'background-image: url(' + recipe.image_url + ')'"></div>
               <div class="v-align">
