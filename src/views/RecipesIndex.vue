@@ -14,7 +14,12 @@
             <option v-for="recipe in recipes">{{ recipe.title }}</option>
           </datalist>
 
-          <div v-for="recipe in filterBy(recipes, titleFilter, 'title', 'ingredients')" class="col-md-4">
+          <div>
+            <button class="btn btn-primary" v-on:click="setSortAttribute('title')">Sort by Title</button>
+            <button class="btn btn-primary" v-on:click="setSortAttribute('prep_time')">Sort by Prep Time</button>
+          </div>
+
+          <div v-for="recipe in orderBy(filterBy(recipes, titleFilter, 'title', 'ingredients'), sortAttribute)" class="col-md-4">
 
             <router-link v-bind:to="'/recipes/' + recipe.id" class="item-grid text-center">
               <div class="image" :style="'background-image: url(' + recipe.image_url + ')'"></div>
@@ -46,7 +51,8 @@ export default {
     return {
       recipes: [],
       currentRecipe: {},
-      titleFilter: ''
+      titleFilter: '',
+      sortAttribute: 'title'
     };
   },
   created: function() {
@@ -55,7 +61,11 @@ export default {
   		this.recipes = response.data;
   	});
   },
-  methods: {}
+  methods: {
+    setSortAttribute: function(attribute) {
+      this.sortAttribute = attribute;
+    }
+  }
 };
 </script>
 
