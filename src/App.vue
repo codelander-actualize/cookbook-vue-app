@@ -65,6 +65,12 @@
   </div>
 </template>
 
+<style>
+  li a.router-link-exact-active {
+    color: #27E1CE !important;
+  }
+</style>
+
 <script>
 
 export default {

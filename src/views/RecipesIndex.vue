@@ -35,6 +35,7 @@
                   <div class="v-align-middle">
                     <h3 class="title">{{ recipe.title }}</h3>
                     <h5 class="category">Preparation Time: {{ recipe.formatted.prep_time }}</h5>
+                    <h5 class="category">Added: {{ relativeDate(recipe.created_at) }}</h5>
                   </div>
                 </div>
               </router-link>
@@ -88,6 +89,7 @@
 <script>
 import axios from "axios";
 import Vue2Filters from "vue2-filters";
+import moment from "moment";
 
 export default {
   mixins: [Vue2Filters.mixin],
@@ -114,6 +116,9 @@ export default {
         this.sortAscending = 1;
       }
       this.sortAttribute = attribute;
+    },
+    relativeDate: function(date) {
+      return moment(date).fromNow();
     }
   }
 };
