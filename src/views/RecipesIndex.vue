@@ -15,8 +15,14 @@
           </datalist>
 
           <div>
-            <button class="btn btn-primary" v-on:click="setSortAttribute('title')">Sort by Title</button>
-            <button class="btn btn-primary" v-on:click="setSortAttribute('prep_time')">Sort by Prep Time</button>
+            <button class="btn btn-primary" v-on:click="setSortAttribute('title')">Sort by Title 
+              <i class="icon-arrow-up" v-if="sortAttribute == 'title' && sortAscending == 1"></i>
+              <i class="icon-arrow-down" v-if="sortAttribute == 'title' && sortAscending == -1"></i>
+            </button>
+            <button class="btn btn-primary" v-on:click="setSortAttribute('prep_time')">Sort by Prep Time
+              <i class="icon-arrow-up" v-if="sortAttribute == 'prep_time' && sortAscending == 1"></i>
+              <i class="icon-arrow-down" v-if="sortAttribute == 'prep_time' && sortAscending == -1"></i>
+            </button>
           </div>
 
           <div v-for="recipe in orderBy(filterBy(recipes, titleFilter, 'title', 'ingredients'), sortAttribute, sortAscending)" class="col-md-4">
