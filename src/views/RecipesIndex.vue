@@ -5,8 +5,8 @@
       <div class="container">
         <div class="row">
 
-
-          <div v-for="recipe in recipes" class="col-md-4">
+          
+          <div v-for="recipe in filterBy(recipes, $parent.titleFilter, 'title', 'ingredients')" class="col-md-4">
             <router-link v-bind:to="'/recipes/' + recipe.id" class="item-grid text-center">
               <div class="image" :style="'background-image: url(' + recipe.image_url + ')'"></div>
               <div class="v-align">
@@ -26,20 +26,17 @@
   </div>
 </template>
 
-<style>
-  img {
-    width: 300px;
-  }
-</style>
 
 <script>
-var axios = require("axios");
+import axios from "axios";
+import Vue2Filters from "vue2-filters";
 
 export default {
+  mixins: [Vue2Filters.mixin],
   data: function() {
     return {
       recipes: [],
-      currentRecipe: {},
+      currentRecipe: {}
     };
   },
   created: function() {
