@@ -19,7 +19,7 @@
             <button class="btn btn-primary" v-on:click="setSortAttribute('prep_time')">Sort by Prep Time</button>
           </div>
 
-          <div v-for="recipe in orderBy(filterBy(recipes, titleFilter, 'title', 'ingredients'), sortAttribute)" class="col-md-4">
+          <div v-for="recipe in orderBy(filterBy(recipes, titleFilter, 'title', 'ingredients'), sortAttribute, sortAscending)" class="col-md-4">
 
             <router-link v-bind:to="'/recipes/' + recipe.id" class="item-grid text-center">
               <div class="image" :style="'background-image: url(' + recipe.image_url + ')'"></div>
@@ -52,7 +52,8 @@ export default {
       recipes: [],
       currentRecipe: {},
       titleFilter: '',
-      sortAttribute: 'title'
+      sortAttribute: 'title',
+      sortAscending: 1
     };
   },
   created: function() {
@@ -63,6 +64,11 @@ export default {
   },
   methods: {
     setSortAttribute: function(attribute) {
+      if (this.sortAttribute === attribute) {
+        this.sortAscending = this.sortAscending * -1;
+      } else {
+        this.sortAscending = 1;
+      }
       this.sortAttribute = attribute;
     }
   }
