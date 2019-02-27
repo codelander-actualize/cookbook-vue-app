@@ -6,7 +6,10 @@
         <div class="row">
 
           
-          <div v-for="recipe in filterBy(recipes, $parent.titleFilter, 'title', 'ingredients')" class="col-md-4">
+          <div>
+            Search by Title: <input type="text" class="form-control" v-model="titleFilter">
+          </div>
+          <div v-for="recipe in filterBy(recipes, titleFilter, 'title', 'ingredients')" class="col-md-4">
             <router-link v-bind:to="'/recipes/' + recipe.id" class="item-grid text-center">
               <div class="image" :style="'background-image: url(' + recipe.image_url + ')'"></div>
               <div class="v-align">
@@ -36,7 +39,8 @@ export default {
   data: function() {
     return {
       recipes: [],
-      currentRecipe: {}
+      currentRecipe: {},
+      titleFilter: ''
     };
   },
   created: function() {
