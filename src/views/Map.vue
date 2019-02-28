@@ -45,10 +45,10 @@ export default {
     ]
     //create the map
     var map = new mapboxgl.Map({
-    container: 'map', // container id
-    style: 'mapbox://styles/mapbox/streets-v9', // stylesheet location
-    center: [places[0].long, places[0].lat], // starting position [lng, lat]
-    zoom: 8 // starting zoom
+      container: 'map', // container id
+      style: 'mapbox://styles/mapbox/streets-v9', // stylesheet location
+      center: [places[0].long, places[0].lat], // starting position [lng, lat]
+      zoom: 8 // starting zoom
     });
 
     places.forEach(function(place){
@@ -61,6 +61,10 @@ export default {
         .setPopup(popup) // sets a popup on this marker
         .addTo(map);
     });
+
+    map.addControl(new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken
+    }));
 
   },
   methods: {}

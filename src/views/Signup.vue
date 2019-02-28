@@ -22,6 +22,9 @@
           <input type="password" class="form-control" placeholder="Password Confirmation" v-model="passwordConfirmation">
           <span v-if="passwordConfirmation.length > 0 && passwordConfirmation !== password" class="text-danger">Must match password</span>
         </div>
+        <div class="form-group">
+          <input type="file" class="form-control" v-on:change="setFile($event)" ref="fileInput">
+        </div>
         <input type="submit" class="btn btn-primary" value="Submit">
       </form>
     </div>
@@ -44,19 +47,25 @@ export default {
       email: "",
       password: "",
       passwordConfirmation: "",
+      avatar: "",
       errors: []
     };
   },
   methods: {
+    setFile: function(event) {
+      if (event.target.files.length > 0) {
+        this.avatar = event.target.files[0];
+      }
+    },
     submit: function() {
-      var params = {
-        name: this.name,
-        email: this.email,
-        password: this.password,
-        password_confirmation: this.passwordConfirmation
-      };
+      var formData = new FormData();
+      formData.append("name", this.name);
+      formData.append("email", this.email);
+      formData.append("password", this.password);
+      formData.append("password_confirmation", this.passwordConfirmation);
+      formData.append("avatar", this.avatar);
       axios
-        .post("/api/users", params)
+        .post("/api/users", formData)
         .then(response => {
           this.$router.push("/login");
         })

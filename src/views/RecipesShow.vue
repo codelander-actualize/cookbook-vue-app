@@ -13,6 +13,9 @@
 
     <button v-on:click="destroyRecipe()">Destroy</button><br>
 
+
+    <p>{{$parent.user.name}}</p>
+
   </div>
 </template>
 

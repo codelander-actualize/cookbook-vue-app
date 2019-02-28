@@ -9,7 +9,10 @@
             <ul>
               <li><router-link to="/">Home</router-link></li>
               <li><router-link to="/recipes/new">New Recipe</router-link></li>
-              <li v-if="isLoggedIn()"><router-link to="/logout">Logout</router-link></li>
+              <span v-if="isLoggedIn()">
+                <li><router-link to="/logout">Logout</router-link></li>
+                <li><router-link to="/users/me"><img :src="user.avatar_url" alt=""></router-link></li>
+              </span>
               <span v-else>
                 <li><router-link to="/login">Login</router-link></li>
                 <li class="cta"><router-link to="/signup">Signup</router-link></li>
@@ -69,16 +72,27 @@
   li a.router-link-exact-active {
     color: #27E1CE !important;
   }
+  li img {
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+  }
 </style>
 
 <script>
-
+import axios from 'axios';
 export default {
   data: function() {
     return {
+      user: {}
     };
   },
-  created: function() {},
+  created: function() {
+    axios.get("/api/users/me").then(response => {
+      this.user = response.data;
+      console.log(this.user);
+    });
+  },
   methods: {
     isLoggedIn: function() {
       return localStorage.getItem('jwt');
